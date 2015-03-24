@@ -20,7 +20,7 @@ if (isset($_GET["pid"])) {
     $pid = $_GET['pid'];
     //$pid = 1;
 
-    $result = $mysqli->query("SELECT * FROM products WHERE pid = {$pid}");
+    $result = $mysqli->query("SELECT * FROM products WHERE pid = '$pid'");
 
     if (!empty($result)) {
         // check for empty result

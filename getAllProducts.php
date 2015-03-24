@@ -10,7 +10,8 @@ include "config.php";
 $response = array();
 
 $result =$mysqli->query("SELECT * FROM products");
-if (!empty($result)) {
+if (!empty($result))
+{
     // check for empty result
     if (mysqli_num_rows($result) > 0) {
         $result = mysqli_fetch_array($result);

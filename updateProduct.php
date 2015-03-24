@@ -18,7 +18,7 @@ if (isset($_POST['pid']) && isset($_POST['name']) && isset($_POST['price']) && i
     $description = $_POST['description'];
 
     //mysqli update row with matched pid
-    $result = $mysqli->query($db, "UPDATE products SET name = {$name}, price = {$price}, description= {description} WHERE pid = {$pid}");
+    $result = $mysqli->query($db, "UPDATE products SET name = '$name', price = '$price', description= '$description' WHERE pid = '$pid'");
 
     //check if row is inserted or not
     if ($result) {
