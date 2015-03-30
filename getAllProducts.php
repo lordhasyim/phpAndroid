@@ -9,29 +9,34 @@ include "config.php";
 
 $response = array();
 
-$result =$mysqli->query("SELECT * FROM products");
-if (!empty($result))
-{
+$result = $mysqli->query("SELECT * FROM products");
+
+if (!empty($result)) {
     // check for empty result
     if (mysqli_num_rows($result) > 0) {
-        $result = mysqli_fetch_array($result);
+        $response["products"] = array();
 
-        $product = array();
-        $product["pid"] = $result["pid"];
-        $product["name"] = $result["name"];
-        $product["price"] = $result["price"];
-        $product["description"] = $result["description"];
-        $product["created_at"] = $result["created_at"];
-        $product["updated_at"] = $result["updated_at"];
+        while ($row = $result->fetch_array()) {
+            $product = array();
+            $product["pid"] = $row["pid"];
+            $product["name"] = $row["name"];
+            $product["price"] = $row["price"];
+            $product["description"] = $row["description"];
+            $product["created_at"] = $row["created_at"];
+            $product["updated_at"] = $row["updated_at"];
+
+            //user node
+            //$response["product"] = array();
+            // push single record into final response
+            array_push($response["products"], $product);
+        }
+
         //success
         $response["success"] = 1;
 
-        //user node
-        $response["product"] = array();
-        array_push($response["product"], $product);
-
         //echo-ing JSON response
-        echo json_encode($response);
+        echo json_encode($response, JSON_PRETTY_PRINT);
+
     } else {
         // no product found
         // succesfully inserted into database
