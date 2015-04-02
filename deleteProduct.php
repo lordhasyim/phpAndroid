@@ -7,11 +7,17 @@
  */
 
 $response = array();
-include "config.php";
 
+require_once __DIR__ . '/DbConnect.php';
+
+$db = new DbConnect();
+$con = $db->connect();
 
 if (isset($_POST['pid'])) {
     $pid = $_POST['pid'];
+
+    $result = mysqli_query($con, "UPDATE products SET name = '$name', price = '$price', description = '$description' WHERE pid = '$pid'");
+
 
     // mysqli update row with matched pid
     $result = $mysqli->query($db, "DELETE FROM products WHERE pid ='$pid'");

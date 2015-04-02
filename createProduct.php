@@ -8,7 +8,6 @@
 
 // coba bikin class DbConnect yg mengambil fungsi con di dbconfig
 
-include "config.php";
 
 // array for JSON response
 $response = array();
@@ -19,9 +18,15 @@ if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['description
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    //$result = mysqli_query("INSERT INTO products(name, price, description) VALUES('$name', '$price', '$description')");
+    // include db connect
+    require_once __DIR__ . '/DbConnect.php';
+
+    // connect to db
+    $db = new DbConnect();
+    $con = $db->connect();
+
     // mysqli inserting a new row
-    $result = $mysqli->query($db, "INSERT INTO products (name, price, description) VALUES ('$name','$price','$description')");
+    $result = mysqli_query($con, "INSERT INTO products (name, price, description) VALUES ('$name','$price','$description')");
 
     // check if row inserted or not
     if ($result) {

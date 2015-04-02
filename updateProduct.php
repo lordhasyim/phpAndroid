@@ -6,7 +6,9 @@
  * Time: 12:39 PM
  */
 
-include "config.php";
+//include "config.php";
+
+
 
 $response = array();
 
@@ -17,8 +19,15 @@ if (isset($_POST['pid']) && isset($_POST['name']) && isset($_POST['price']) && i
     $price = $_POST['price'];
     $description = $_POST['description'];
 
+    // include db connect class
+    require_once __DIR__ . '/DbConnect.php';
+
+    // connect to db
+    $db = new DbConnect();
+    $con = $db->connect();
+
     //mysqli update row with matched pid
-    $result = $mysqli->query($db, "UPDATE products SET name = '$name', price = '$price', description= '$description' WHERE pid = '$pid'");
+    $result = mysqli_query($con, "UPDATE products SET name = '$name', price = '$price', description = '$description' WHERE pid = '$pid'");
 
     //check if row is inserted or not
     if ($result) {

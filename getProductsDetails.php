@@ -12,7 +12,14 @@
 
 $response = array();
 
-include "config.php";
+//include "config.php";
+
+// include db connect class
+require_once __DIR__ . '/DbConnect.php';
+
+// connect to db
+$db = new DbConnect();
+$con = $db->connect();
 
 //var_dump($result);
 
@@ -20,7 +27,7 @@ if (isset($_GET["pid"])) {
     $pid = $_GET['pid'];
     //$pid = 1;
 
-    $result = $mysqli->query("SELECT * FROM products WHERE pid = '$pid'");
+    $result = mysqli_connect($con, "SELECT * FROM products WHERE pid = '$pid'");
 
     if (!empty($result)) {
         // check for empty result
@@ -36,7 +43,6 @@ if (isset($_GET["pid"])) {
             $product["updated_at"] = $result["updated_at"];
             //success
             $response["success"] = 1;
-
             //user node
             $response["product"] = array();
             array_push($response["product"], $product);
