@@ -16,15 +16,12 @@ $con = $db->connect();
 if (isset($_POST['pid'])) {
     $pid = $_POST['pid'];
 
-    $result = mysqli_query($con, "UPDATE products SET name = '$name', price = '$price', description = '$description' WHERE pid = '$pid'");
-
-
     // mysqli update row with matched pid
-    $result = $mysqli->query($db, "DELETE FROM products WHERE pid ='$pid'");
+    $result = mysqli_query($con, "DELETE FROM products WHERE pid ='$pid'");
 
 
     //check if row deleted or not
-    if (mysqli_affected_rows($mysqli) > 0) {
+    if (mysqli_affected_rows($con) > 0) {
         //successfully updated
         $response["success"] = 1;
         $response["message"] = "Product successfully deleted";

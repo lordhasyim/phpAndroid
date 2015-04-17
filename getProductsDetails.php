@@ -12,8 +12,6 @@
 
 $response = array();
 
-//include "config.php";
-
 // include db connect class
 require_once __DIR__ . '/DbConnect.php';
 
@@ -21,13 +19,11 @@ require_once __DIR__ . '/DbConnect.php';
 $db = new DbConnect();
 $con = $db->connect();
 
-//var_dump($result);
-
-if (isset($_GET["pid"])) {
+if (isset($_GET['pid'])) {
     $pid = $_GET['pid'];
-    //$pid = 1;
+    //$pid = 3;
 
-    $result = mysqli_connect($con, "SELECT * FROM products WHERE pid = '$pid'");
+    $result = mysqli_query($con, "SELECT * FROM products WHERE pid = '$pid'");
 
     if (!empty($result)) {
         // check for empty result
@@ -67,4 +63,3 @@ if (isset($_GET["pid"])) {
         echo json_encode($response);
     }
 }
-

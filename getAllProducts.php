@@ -44,7 +44,7 @@ if (!empty($result)) {
         $response["success"] = 1;
 
         //echo-ing JSON response
-        echo json_encode($response, JSON_PRETTY_PRINT);
+        echo json_encode($response);
 
     } else {
         // no product found
